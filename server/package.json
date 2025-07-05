@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for the quickstay/ hotel booking web-app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dafriyie7/QuickStay.git"
+  },
+  "keywords": [
+    "hotel",
+    "booking",
+    "quickstay"
+  ],
+  "author": "Daniel Afriyie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dafriyie7/QuickStay/issues"
+  },
+  "homepage": "https://github.com/dafriyie7/QuickStay#readme",
+  "dependencies": {
+    "@clerk/express": "^1.7.4",
+    "cloudinary": "^2.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "multer": "^2.0.1",
+    "svix": "^1.68.0"
+  }
+}

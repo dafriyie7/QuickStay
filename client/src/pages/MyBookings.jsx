@@ -53,7 +53,7 @@ const MyBookings = () => {
 									<span>Guests: {booking.guests}</span>
 								</div>
 								<p className="text-base">
-									Total: Ghs {booking.totalPrice}
+									Total: GH₵ {booking.totalPrice}
 								</p>
 							</div>
 						</div>

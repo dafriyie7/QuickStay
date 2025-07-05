@@ -115,7 +115,7 @@ const AllRooms = () => {
 							</div>
 							{/* room price per night */}
 							<p className="text-xl font-medium text-gray-700">
-								Ghs {room.pricePerNight} /night
+								GH₵ {room.pricePerNight} /night
 							</p>
 						</div>
 					</div>
@@ -159,7 +159,7 @@ const AllRooms = () => {
 							Price Range
 						</p>
 						{priceRAnges.map((range, index) => (
-							<CheckBox key={index} label={`Ghs ${range}`} />
+							<CheckBox key={index} label={`GH₵ ${range}`} />
 						))}
 					</div>
 					<div className="px-5 pt-5 pb-7">

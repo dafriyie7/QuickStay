@@ -14,12 +14,15 @@ const clerkWebHooks = async (req, res) => {
 		// Verify webhook
 		await whook.verify(JSON.stringify(req.body), headers);
 
+		// Verify webhook
+		await whook.verify(req.body, headers); // newest. might delet later
+
 		const { data, type } = req.body;
 
 		const userData = {
 			_id: data.id,
 			email: data.email_addresses[0].email_address,
-			username: `${data.first_name} ${data.last_name}`,
+			username: data.first_name + " " + data.last_name,
 			image: data.image_url,
 		};
 

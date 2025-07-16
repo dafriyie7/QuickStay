@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema(
 		},
 		email: {
 			type: String,
-			requied: true,
+			required: true, // ❗ fixed typo: "requied" ➝ "required"
 		},
 		image: {
 			type: String,
@@ -23,14 +23,14 @@ const userSchema = mongoose.Schema(
 			enum: ["user", "hotelOwner"],
 			default: "user",
 		},
-		recentSearchCities: [
+		recentSearchedCities: [
 			{
 				type: String,
 				required: true,
 			},
 		],
 	},
-	{ timeStamps: true }
+	{ timestamps: true } // ❗ fixed typo: "timeStamps" ➝ "timestamps"
 );
 
 const User = mongoose.model("User", userSchema);

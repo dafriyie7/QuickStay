@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets.js";
-import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
+import { useAppContext } from "../context/Appcontext.jsx";
+import { useClerk } from "@clerk/clerk-react";
+import { useLocation, Link } from "react-router-dom";
+import { UserButton } from "@clerk/clerk-react";
+
 
 const Navbar = () => {
 	const BookIcon = () => (
@@ -34,19 +37,20 @@ const Navbar = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { openSignIn } = useClerk();
-	const { user } = useUser();
-	const navigate = useNavigate();
 	const location = useLocation();
 
+	const { user, navigate, isOwner, setShowHotelReg } = useAppContext();
+	console.log(isOwner)
+	
+
 	useEffect(() => {
-		if (location.pathname !== '/') {
-			setIsScrolled(true)
-			return
+		if (location.pathname !== "/") {
+			setIsScrolled(true);
+			return;
 		} else {
-			setIsScrolled(false)
+			setIsScrolled(false);
 		}
-		setIsScrolled(prev => location.pathname !== '/' ? true : prev
-		);
+		setIsScrolled((prev) => (location.pathname !== "/" ? true : prev));
 
 		const handleScroll = () => {
 			setIsScrolled(window.scrollY > 10);
@@ -90,14 +94,17 @@ const Navbar = () => {
 						/>
 					</a>
 				))}
-				<button
-					className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${
-						isScrolled ? "text-black" : "text-white"
-					} transition-all`}
-					onClick={() => navigate("/owner")}
-				>
-					Dashboard
-				</button>
+
+				{user && (
+					<button
+						className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${
+							isScrolled ? "text-black" : "text-white"
+						} transition-all`}
+						onClick={() => isOwner ? navigate("/owner") : setShowHotelReg(true)}
+					>
+						{isOwner ? 'Dashboard' : 'List Your Hotel'}
+					</button>
+				)}
 			</div>
 
 			{/* Desktop Right */}
@@ -181,9 +188,9 @@ const Navbar = () => {
 				{user && (
 					<button
 						className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all"
-						onClick={() => navigate("/owner")}
+						onClick={() => isOwner ? navigate('/owner') : setShowHotelReg(true) }
 					>
-						Dashboard
+						{isOwner ? 'Dashboard' : "List Your Hotel"}
 					</button>
 				)}
 

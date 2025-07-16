@@ -21,7 +21,7 @@ const bookingSchema = new mongoose.Schema(
         },
         isPaid: {type: Boolean, default: false}
 	},
-	{ timestamps }
+	{ timestamps: true }
 );
 
 const Booking = mongoose.model("Booking", bookingSchema);

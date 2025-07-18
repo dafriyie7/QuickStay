@@ -15,8 +15,10 @@ const RoomDetails = () => {
 	const [guests, setGuests] = useState(1);
 	const [isAvailable, setIsAvailable] = useState(false);
 
+
+
 	// check room availability
-	const checkAvailability = async () => {
+	const checkAvailability = async (token) => {
 		try {
 			// check if check-in date is greater than checkout date
 			if (checkInDate >= checkOutDate) {
@@ -25,7 +27,12 @@ const RoomDetails = () => {
 			}
 			const { data } = await axios.post(
 				"/api/bookings/check-availability",
-				{ room: id, checkInDate, checkOutDate }
+				{ room: id, checkInDate, checkOutDate },
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
 			);
 
 			if (data.success) {
@@ -47,9 +54,15 @@ const RoomDetails = () => {
 	// submit handler to check availability & book the room
 	const onSubmitHandler = async (e) => {
 		try {
+			const token = await getToken();
+			if (!token) {
+				toast.error("You must be logged in to make a booking.");
+				return;
+			}
+
 			e.preventDefault();
 			if (!isAvailable) {
-				return checkAvailability();
+				return checkAvailability(token);
 			} else {
 				const { data } = await axios.post(
 					"/api/bookings/book",
@@ -62,7 +75,7 @@ const RoomDetails = () => {
 					},
 					{
 						headers: {
-							Authorization: `Bearer ${await getToken()}`
+							Authorization: `Bearer ${token}`
 						},
 					}
 				);
@@ -85,7 +98,7 @@ const RoomDetails = () => {
 			setRoom(foundRoom);
 			setMainImage(foundRoom.images[0]);
 		}
-	}, [id]);
+	}, [id,rooms]);
 
 	if (!room) return null;
 
@@ -138,7 +151,7 @@ const RoomDetails = () => {
 							onClick={() => setMainImage(image)}
 							className={`w-full rounded-xl shadow-md object-cover cursor-pointer ${
 								mainImage === image &&
-								"outline outline-2 outline-orange-500"
+								" outline-3 outline-orange-500"
 							}`}
 						/>
 					))}

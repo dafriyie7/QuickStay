@@ -11,7 +11,7 @@ import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRoutes.js";
 
 // Connect DB and Cloudinary
-connectDB();
+await connectDB();
 cloudinary;
 
 const app = express();

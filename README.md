@@ -2,6 +2,8 @@
 
 **Quick Stay** is a modern, full-featured hotel booking platform built with the MERN (MongoDB, Express.js, React.js, Node.js) stack. It enables users to discover, browse, and book hotel rooms seamlessly, while providing administrators with tools to manage listings, availability, and reservations.
 
+[view live demo](https://quick-stay-sand.vercel.app/)
+
 ---
 
 ## Features
@@ -34,6 +36,5 @@ quick-stay/
 ├── client/ # React frontend
 ├── server/ # Express backend
 └── README.md
-
 
 ---
